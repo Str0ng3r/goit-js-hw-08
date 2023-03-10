@@ -19,7 +19,7 @@ const updateEmail = () => {
     console.log(valueEmail)
     localStorage.setItem('valEmail', valueEmail)
 }
- const thrUpdateEmail = throttle(updateEmail,1000);
+ const thrUpdateEmail = throttle(updateEmail,500);
 inputEmail.addEventListener('input',thrUpdateEmail);
 
 const updateMessage = () => {
@@ -27,7 +27,7 @@ const updateMessage = () => {
     localStorage.setItem('message',valueMess)
 }
 
- const thrUpdateMessage = throttle(updateMessage,1000)
+ const thrUpdateMessage = throttle(updateMessage,500)
 inputMessage.addEventListener('input',thrUpdateMessage)
 
 
@@ -41,6 +41,9 @@ inputMessage.value = localStorage.getItem('message')
 
  butSubmit.addEventListener('click',(event) => {
     event.preventDefault();
+    console.log(inputEmail.value)
+    console.log(inputMessage.value)
+    localStorage.clear()
     inputEmail.value = ''
     inputMessage.value = ''
  })
