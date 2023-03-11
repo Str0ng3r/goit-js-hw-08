@@ -11,7 +11,6 @@ const inputMessage = document.getElementById('message')
 
 const updateEmail = () => {
     const valueEmail = inputEmail.value
-    console.log(valueEmail)
     localStorage.setItem('valEmail', valueEmail)
 }
  const thrUpdateEmail = throttle(updateEmail,500);
@@ -27,18 +26,25 @@ inputMessage.addEventListener('input',thrUpdateMessage)
 
 
  if(localStorage.getItem('valEmail') && localStorage.getItem('message')){
-
-
 inputEmail.value = localStorage.getItem('valEmail')
 inputMessage.value = localStorage.getItem('message')
-
  }
 
+
  butSubmit.addEventListener('click',(event) => {
+    if(inputEmail.value === '' || inputMessage.value === ''){
+alert('Всі поля потрібні бути заповнені')
+    }
+    const valueMessSub = inputMessage.value
+    localStorage.setItem('message',valueMessSub)
+
+    const valueEmailSub = inputEmail.value
+    localStorage.setItem('valEmail', valueEmailSub)
+
     event.preventDefault();
+
     console.log(inputEmail.value)
     console.log(inputMessage.value)
-    localStorage.clear()
     inputEmail.value = ''
     inputMessage.value = ''
  })
