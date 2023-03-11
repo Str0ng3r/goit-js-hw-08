@@ -8,11 +8,6 @@ const inputEmail = document.getElementById('email')
 const inputMessage = document.getElementById('message')
 
  const butSubmit = document.getElementById('submitBut')
- console.log(butSubmit)
-console.log(inputEmail)
-console.log(inputMessage)
-console.log(form)
-
 
 const updateEmail = () => {
     const valueEmail = inputEmail.value
