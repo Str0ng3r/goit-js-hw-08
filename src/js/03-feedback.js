@@ -10,14 +10,32 @@ console.log(feedEmail)
 console.log(feedMessages)
 console.log(butSubmit)
 
+if(JSON.parse(localStorage.getItem('formData')) ){
+const formParseData = JSON.parse(localStorage.getItem('formData'));
+console.log(formParseData)
+feedEmail.value = formParseData.email
+feedMessages.value = formParseData.message
+}
+
+
 const updateLocaleEmail = () => {
-const localeInfEmail = feedEmail.value
-localStorage.setItem('email',localeInfEmail)
+    const formData = {
+        email: feedEmail.value,
+        message: feedMessages.value
+    };
+    
+    // Записываем данные в localStorage
+    localStorage.setItem('formData', JSON.stringify(formData));
 }
 
 const updateLocaleMessage = () => {
-    const localeInfMessage= feedMessages.value
-    localStorage.setItem('message',localeInfMessage)
+    const formData = {
+        email: feedEmail.value,
+        message: feedMessages.value
+    };
+    
+    // Записываем данные в localStorage
+    localStorage.setItem('formData', JSON.stringify(formData));
     }
 
    const thrUpdateLocaleMessage = throttle(updateLocaleMessage,500)
@@ -36,9 +54,22 @@ if(!feedEmail.value || !feedMessages.value){
     alert('Заповніть усі поля')
     return
 }
-feedEmail.value = ''
-feedMessages.value = ''
+
+
+const formData = {
+    email: feedEmail.value,
+    message: feedMessages.value
+};
+
+// Записываем данные в localStorage
+localStorage.setItem('formData', JSON.stringify(formData));
+
+// Очищаем поля формы
+feedEmail.value = '';
+feedMessages.value = '';
 })
+
+
 
 
 
