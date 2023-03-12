@@ -1,50 +1,46 @@
 let throttle = require('lodash.throttle');
-
 'use strict'
-const form = document.getElementsByClassName('feedback-form')
+const feedbackForm = document.querySelector('.feedback-form')
+const feedEmail = document.querySelector('#email')
+const feedMessages = document.querySelector('#message')
+const butSubmit = document.querySelector('#submitBut')
 
-const inputEmail = document.getElementById('email')
+console.log(feedbackForm)
+console.log(feedEmail)
+console.log(feedMessages)
+console.log(butSubmit)
 
-const inputMessage = document.getElementById('message')
-
- const butSubmit = document.getElementById('submitBut')
-
-const updateEmail = () => {
-    const valueEmail = inputEmail.value
-    localStorage.setItem('valEmail', valueEmail)
-}
- const thrUpdateEmail = throttle(updateEmail,500);
-inputEmail.addEventListener('input',thrUpdateEmail);
-
-const updateMessage = () => {
-    const valueMess = inputMessage.value
-    localStorage.setItem('message',valueMess)
+const updateLocaleEmail = () => {
+const localeInfEmail = feedEmail.value
+localStorage.setItem('email',localeInfEmail)
 }
 
- const thrUpdateMessage = throttle(updateMessage,500)
-inputMessage.addEventListener('input',thrUpdateMessage)
-
-
- if(localStorage.getItem('valEmail') && localStorage.getItem('message')){
-inputEmail.value = localStorage.getItem('valEmail')
-inputMessage.value = localStorage.getItem('message')
- }
-
-
- butSubmit.addEventListener('click',(event) => {
-    if(inputEmail.value === '' || inputMessage.value === ''){
-alert('Всі поля потрібні бути заповнені')
+const updateLocaleMessage = () => {
+    const localeInfMessage= feedMessages.value
+    localStorage.setItem('message',localeInfMessage)
     }
-    const valueMessSub = inputMessage.value
-    localStorage.setItem('message',valueMessSub)
 
-    const valueEmailSub = inputEmail.value
-    localStorage.setItem('valEmail', valueEmailSub)
+   const thrUpdateLocaleMessage = throttle(updateLocaleMessage,500)
 
-    event.preventDefault();
+feedMessages.addEventListener('input',thrUpdateLocaleMessage)
 
-    console.log(inputEmail.value)
-    console.log(inputMessage.value)
-    inputEmail.value = ''
-    inputMessage.value = ''
- })
+const thrUpdateLocaleEmail = throttle(updateLocaleEmail,500);
+
+feedEmail.addEventListener('input',thrUpdateLocaleEmail);
+
+
+
+feedbackForm.addEventListener('submit',(event)=> {
+event.preventDefault()
+if(!feedEmail.value || !feedMessages.value){
+    alert('Заповніть усі поля')
+    return
+}
+feedEmail.value = ''
+feedMessages.value = ''
+})
+
+
+
+
+
