@@ -5,14 +5,8 @@ const feedEmail = document.querySelector('#email')
 const feedMessages = document.querySelector('#message')
 const butSubmit = document.querySelector('#submitBut')
 
-console.log(feedbackForm)
-console.log(feedEmail)
-console.log(feedMessages)
-console.log(butSubmit)
-
 if(JSON.parse(localStorage.getItem('formData')) ){
 const formParseData = JSON.parse(localStorage.getItem('formData'));
-console.log(formParseData)
 feedEmail.value = formParseData.email
 feedMessages.value = formParseData.message
 }
@@ -60,9 +54,10 @@ const formData = {
     email: feedEmail.value,
     message: feedMessages.value
 };
-
+console.log(formData)
 // Записываем данные в localStorage
 localStorage.setItem('formData', JSON.stringify(formData));
+
 
 // Очищаем поля формы
 feedEmail.value = '';
